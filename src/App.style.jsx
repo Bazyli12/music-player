@@ -24,6 +24,40 @@ export const Timeline = styled.div`
 
     input[type="range"] {
         width: 600px;
+        height: 4px;
+        overflow: hidden;
+
+        -webkit-appearance: none;
+        background: #5e5e5e;
+        outline: none;
+        border-radius: calc(4px / 2);
+    }
+
+    input[type="range"]:focus {
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb:hover {
+        // -webkit-appearance: none;
+
+        background: #1db954;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        dispay: none;
+        // background: red;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        // -webkit-appearance: none;
+        // width: 15px;
+        // height: 15px;
+        // border-radius: 50%;
+        // background: #00fd0a;
+        // cursor: pointer;
+        // border: 4px solid #333;
+        // box-shadow: -407px 0 0 400px #00fd0a;
     }
 `;
 
