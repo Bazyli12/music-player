@@ -8,11 +8,11 @@ export default class App extends React.Component {
         super(props);
 
         this.state = {
-            play: false,
-            pause: true,
-            time: 0,
-            duration: 0,
-            isTimelineUsing: false,
+            isPlay: false,
+            isPause: true,
+            isUsingTimeline: false,
+            soundTime: 0,
+            soundDuration: 0,
         };
 
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -22,7 +22,6 @@ export default class App extends React.Component {
         this.audio = new Audio(this.url);
     }
 
-    // metoda od zmiany sekund na minuty i sekundy
     convert(seconds) {
         let sec = Math.floor(seconds);
         let min = Math.floor(sec / 60);
@@ -32,7 +31,6 @@ export default class App extends React.Component {
         return min + ":" + sec;
     }
 
-    // metoda od togglowania on/off
     togglePlay() {
         this.setState({ play: !this.state.play }, () => {
             this.state.play ? this.audio.play() : this.audio.pause();
@@ -49,57 +47,36 @@ export default class App extends React.Component {
         this.audio.pause();
     }
 
-    // handler od klikania w przycisk
     handlePlayClick() {
         this.togglePlay();
     }
 
-    // handler od zmiany sekundy w timelinie
-    // handleTimelineChange() {
-    //     this.timeline = document.querySelector("#timeline");
-    //     this.pause();
-    //     this.audio.currentTime = this.timeline.value;
-    //     // this.setState({
-    //     //     time: this.state.time,
-    //     // });
-    // }
+    changeTimeline() {
+        this.setState({
+            isUsingTimeline: true,
+        });
+    }
 
     componentDidMount() {
         this.timeline = document.querySelector("#timeline");
 
         setInterval(() => {
             if (this.state.play) {
-                if (!this.state.isTimelineUsing)
+                if (!this.state.isUsingTimeline)
                     this.timeline.value = this.audio.currentTime;
             }
         }, 1);
 
         this.timeline.addEventListener("mouseup", () => {
-            // this.play();
             this.audio.currentTime = this.timeline.value;
             this.setState({
-                isTimelineUsing: false,
+                isUsingTimeline: false,
             });
         });
 
-        // event od zmiany inputa w rangu
-        // this.timeline.addEventListener(
-        //     "input",
-        //     () => {
-        //         // this.audio.currentTime = this.value;
-        //         console.log(this.timeline.value);
-        //         // console.log(this.state.time);
-        //         this.audio.currentTime = this.timeline.value;
-        //         // this.setState({
-        //         //     time: this.volumeControl.value,
-        //         // });
-        //     },
-        //     false
-        // );
-
         this.audio.addEventListener("canplay", () => {
             this.setState({
-                duration: this.audio.duration,
+                soundDuration: this.audio.duration,
             });
             this.timeline.value = this.audio.currentTime;
         });
@@ -110,7 +87,7 @@ export default class App extends React.Component {
 
         this.audio.addEventListener("timeupdate", () => {
             this.setState({
-                time: this.audio.currentTime,
+                soundTime: this.audio.currentTime,
             });
         });
     }
@@ -153,21 +130,16 @@ export default class App extends React.Component {
                     </Play>
                 </Navigation>
                 <Timeline>
-                    <span>{this.convert(this.state.time)}</span>
+                    <span>{this.convert(this.state.soundTime)}</span>
                     <input
                         type="range"
                         id="timeline"
                         defaultValue="0"
-                        max={this.state.duration}
-                        // value={this.state.time}
-                        step="0.1"
-                        onChange={() => {
-                            this.setState({
-                                isTimelineUsing: true,
-                            });
-                        }}
+                        max={this.state.soundDuration}
+                        step="0.01"
+                        onChange={() => this.changeTimeline()}
                     />
-                    <span>{this.convert(this.state.duration)}</span>
+                    <span>{this.convert(this.state.soundDuration)}</span>
                 </Timeline>
             </Wrapper>
         );

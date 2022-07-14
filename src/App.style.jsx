@@ -23,7 +23,7 @@ export const Timeline = styled.div`
     }
 
     input[type="range"] {
-        width: 300px;
+        width: 600px;
     }
 `;
 
