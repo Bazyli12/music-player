@@ -5,59 +5,61 @@ export const Wrapper = styled.div`
     justify-content: center;
     background-color: #141414;
     flex-direction: column;
+    padding: 20px 0;
 `;
 
 export const Navigation = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: row;
+    margin-bottom: 8px;
 `;
 export const Timeline = styled.div`
+    @import url("https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap");
+
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: row;
 
-    span {
-        color: white;
+    #time,
+    #duration {
+        font-family: "Athiti", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: #a7a7a7;
         margin: 0 5px;
     }
 
     input[type="range"] {
+        --color: transparent;
+        --timeline-color: linear-gradient(#fff, #fff);
+        --shadow: 0;
+
+        :active {
+            outline: none;
+        }
+        appearance: none;
         width: 600px;
         height: 4px;
-        overflow: hidden;
-
-        -webkit-appearance: none;
         background: #5e5e5e;
-        outline: none;
-        border-radius: calc(4px / 2);
-    }
+        border-radius: 5px;
+        background-image: var(--timeline-color);
+        background-size: 0% 100%;
+        background-repeat: no-repeat;
 
-    input[type="range"]:focus {
-        outline: none;
-    }
-
-    input[type="range"]::-webkit-slider-thumb:hover {
-        // -webkit-appearance: none;
-
-        background: #1db954;
-    }
-
-    input[type="range"]::-webkit-slider-runnable-track {
-        width: 100%;
-        dispay: none;
-        // background: red;
-    }
-
-    input[type="range"]::-webkit-slider-thumb {
-        // -webkit-appearance: none;
-        // width: 15px;
-        // height: 15px;
-        // border-radius: 50%;
-        // background: #00fd0a;
-        // cursor: pointer;
-        // border: 4px solid #333;
-        // box-shadow: -407px 0 0 400px #00fd0a;
+        ::-webkit-slider-thumb {
+            :hover {
+                background: var(--color);
+                box-shadow: var(--shadow);
+            }
+            appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: var(--color);
+            box-shadow: var(--shadow);
+        }
     }
 `;
 

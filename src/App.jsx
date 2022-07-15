@@ -62,8 +62,16 @@ export default class App extends React.Component {
 
         setInterval(() => {
             if (this.state.play) {
-                if (!this.state.isUsingTimeline)
+                if (!this.state.isUsingTimeline) {
                     this.timeline.value = this.audio.currentTime;
+
+                    const min = this.timeline.min;
+                    const max = this.timeline.max;
+                    const val = this.timeline.value;
+
+                    this.timeline.style.backgroundSize =
+                        ((val - min) * 100) / (max - min) + "% 100%";
+                }
             }
         }, 1);
 
@@ -89,6 +97,45 @@ export default class App extends React.Component {
             this.setState({
                 soundTime: this.audio.currentTime,
             });
+        });
+
+        this.rangeInputs = document.querySelectorAll('input[type="range"]');
+
+        function handleInputChange(e) {
+            let target = e.target;
+            if (e.target.type !== "range") {
+                target = document.getElementById("range");
+            }
+            const min = target.min;
+            const max = target.max;
+            const val = target.value;
+
+            target.style.backgroundSize =
+                ((val - min) * 100) / (max - min) + "% 100%";
+        }
+
+        this.rangeInputs.forEach((input) => {
+            input.addEventListener("input", handleInputChange);
+        });
+
+        this.timeline.addEventListener("mouseover", () => {
+            this.timeline.style.setProperty("--color", "#fff");
+            this.timeline.style.setProperty(
+                "--timeline-color",
+                "linear-gradient(#1db954, #1db954)"
+            );
+            this.timeline.style.setProperty(
+                "--shadow",
+                "0 2px 4px 0 rgb(0 0 0 / 50%)"
+            );
+        });
+        this.timeline.addEventListener("mouseout", () => {
+            this.timeline.style.setProperty("--color", "transparent");
+            this.timeline.style.setProperty(
+                "--timeline-color",
+                "linear-gradient(#fff, #fff)"
+            );
+            this.timeline.style.setProperty("--shadow", "0");
         });
     }
 
@@ -130,7 +177,7 @@ export default class App extends React.Component {
                     </Play>
                 </Navigation>
                 <Timeline>
-                    <span>{this.convert(this.state.soundTime)}</span>
+                    <div id="time">{this.convert(this.state.soundTime)}</div>
                     <input
                         type="range"
                         id="timeline"
@@ -139,7 +186,9 @@ export default class App extends React.Component {
                         step="0.01"
                         onChange={() => this.changeTimeline()}
                     />
-                    <span>{this.convert(this.state.soundDuration)}</span>
+                    <div id="duration">
+                        {this.convert(this.state.soundDuration)}
+                    </div>
                 </Timeline>
             </Wrapper>
         );
