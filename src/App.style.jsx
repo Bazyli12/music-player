@@ -1,24 +1,50 @@
 import styled, { css } from "styled-components";
 
-export const Wrapper = styled.div`
+export const Navigaton = styled.div`
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+`;
+
+export const Player = styled.div`
     display: flex;
     justify-content: center;
     background-color: #141414;
     flex-direction: column;
-    padding: 20px 0;
+    width: 40%;
 `;
 
-export const Navigation = styled.div`
+export const NowPlaying = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: #141414;
+    flex-direction: column;
+    width: 30%;
+`;
+export const Options = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: #141414;
+    flex-direction: column;
+    width: 30%;
+`;
+
+export const Buttons = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: row;
     margin-bottom: 8px;
+    gap: 16px;
 `;
+
 export const Timeline = styled.div`
     @import url("https://fonts.googleapis.com/css2?family=Athiti:wght@200;300;400;500;600;700&display=swap");
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
 
@@ -28,7 +54,8 @@ export const Timeline = styled.div`
         font-size: 12px;
         font-weight: 500;
         color: #a7a7a7;
-        margin: 0 5px;
+        cursor: default;
+        user-select: none;
     }
 
     input[type="range"] {
@@ -63,25 +90,55 @@ export const Timeline = styled.div`
     }
 `;
 
+export const PlayerLeft = styled.div`
+    button {
+        transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
+        color: #fff;
+        background-color: transparent;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        :hover svg {
+            fill: white;
+        }
+    }
+`;
+
+export const PlayerRight = styled.div`
+    button {
+        transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
+        color: #fff;
+        background-color: transparent;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        :hover svg {
+            fill: white;
+        }
+    }
+`;
+
 export const Play = styled.button`
     transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
     background-color: white;
     padding: 0;
-    // 32px normalnie
     width: 48px;
     height: 48px;
     border-radius: 100%;
     border: 0;
-    margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &.on {
-    }
-
-    &.off {
-    }
 
     &:hover {
         transform: scale(1.06);
