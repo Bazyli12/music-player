@@ -31,7 +31,7 @@ export default class App extends React.Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
-        this.url = "/public/music/vetther2.mp3";
+        this.url = "music/vetther2.mp3";
     }
 
     togglePlay() {
