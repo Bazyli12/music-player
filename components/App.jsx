@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
 import {
     Player,
@@ -11,7 +11,9 @@ import {
     Navigaton,
     NowPlaying,
     Options,
-} from "./App.style";
+} from "./_App";
+
+import convertTime from "../utils/convertTime";
 
 export default class App extends React.Component {
     constructor(props) {
@@ -28,26 +30,7 @@ export default class App extends React.Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.componentWillUnmount = this.componentWillUnmount.bind(this);
 
-        this.url = "/static/music/vetther2.mp3";
-        this.audio = new Audio(this.url);
-    }
-
-    convert(seconds) {
-        let sec = Math.floor(seconds);
-        let min = Math.floor(sec / 60);
-        let hour = Math.floor(min / 60);
-
-        hour = Math.floor(hour % 60);
-        min = Math.floor(min % 60);
-        sec = Math.floor(sec % 60);
-
-        sec = sec >= 10 ? sec : "0" + sec;
-
-        if (hour >= 1) {
-            min = min >= 10 ? min : "0" + min;
-            return hour + ":" + min + ":" + sec;
-        }
-        return min + ":" + sec;
+        this.url = "/public/music/vetther2.mp3";
     }
 
     togglePlay() {
@@ -77,6 +60,7 @@ export default class App extends React.Component {
     }
 
     componentDidMount() {
+        this.audio = new Audio(this.url);
         this.timeline = document.querySelector("#timeline");
 
         setInterval(() => {
@@ -222,9 +206,7 @@ export default class App extends React.Component {
                         </PlayerRight>
                     </Buttons>
                     <Timeline>
-                        <div id="time">
-                            {this.convert(this.state.soundTime)}
-                        </div>
+                        <div id="time">{convertTime(this.state.soundTime)}</div>
                         <input
                             type="range"
                             id="timeline"
@@ -234,7 +216,7 @@ export default class App extends React.Component {
                             onChange={() => this.changeTimeline()}
                         />
                         <div id="duration">
-                            {this.convert(this.state.soundDuration)}
+                            {convertTime(this.state.soundDuration)}
                         </div>
                     </Timeline>
                 </Player>
