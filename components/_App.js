@@ -1,4 +1,12 @@
-import styled, { css } from "styled-components";
+import styled, { css, createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+`;
 
 export const Navigaton = styled.div`
     position: fixed;
