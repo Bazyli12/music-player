@@ -2,25 +2,39 @@ import styled, { css, createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
     body {
+        overflow: hidden;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        #__next {
+            height: 100vh;
+            width: 100vw;
+            background-color: #121212;
+        }
     }
 `;
 
-export const Navigaton = styled.div`
+export const Footer = styled.footer`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    background-color: #181818;
+    border-top: 1px solid #282828;
+`;
+
+export const Navigaton = styled.div`
+    min-width: 620px;
     height: 110px;
+    padding: 0 16px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 `;
 
 export const Player = styled.div`
     display: flex;
     justify-content: center;
-    background-color: #141414;
     flex-direction: column;
     width: 40%;
 `;
@@ -28,14 +42,12 @@ export const Player = styled.div`
 export const NowPlaying = styled.div`
     display: flex;
     justify-content: center;
-    background-color: #141414;
     flex-direction: column;
     width: 30%;
 `;
 export const Options = styled.div`
     display: flex;
     justify-content: center;
-    background-color: #141414;
     flex-direction: column;
     width: 30%;
 `;
