@@ -35,6 +35,7 @@ export const Navigaton = styled.div`
 export const Player = styled.div`
     display: flex;
     justify-content: center;
+    align-self: center;
     flex-direction: column;
     width: 40%;
     min-width: 360px;
@@ -43,13 +44,16 @@ export const Player = styled.div`
 export const NowPlaying = styled.div`
     display: flex;
     justify-content: center;
+    align-self: center;
     flex-direction: column;
     width: 30%;
 `;
 export const Options = styled.div`
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
+    align-self: center;
+    justify-content: flex-end;
+    min-width: 180px;
     width: 30%;
 `;
 
@@ -98,6 +102,7 @@ export const Timeline = styled.div`
         :active {
             outline: none;
         }
+
         appearance: none;
         width: 600px;
         height: 4px;
@@ -112,6 +117,67 @@ export const Timeline = styled.div`
                 background: var(--color);
                 box-shadow: var(--shadow);
             }
+
+            appearance: none;
+            height: 14px;
+            width: 14px;
+            border-radius: 50%;
+            background: var(--color);
+            box-shadow: var(--shadow);
+        }
+    }
+`;
+
+export const VolumeBar = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
+        color: #fff;
+        background-color: transparent;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        :hover svg {
+            fill: white;
+        }
+
+        :active svg {
+            fill: #bababa;
+        }
+    }
+
+    input[type="range"] {
+        --color: transparent;
+        --timeline-color: linear-gradient(#fff, #fff);
+        --shadow: 0;
+
+        :active {
+            outline: none;
+        }
+
+        appearance: none;
+        height: 4px;
+        width: 125px;
+        background: #5e5e5e;
+        border-radius: 5px;
+        background-image: var(--timeline-color);
+        background-size: 0% 100%;
+        background-repeat: no-repeat;
+
+        ::-webkit-slider-thumb {
+            :hover {
+                background: var(--color);
+                box-shadow: var(--shadow);
+            }
+
             appearance: none;
             height: 14px;
             width: 14px;
