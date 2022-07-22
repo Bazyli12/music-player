@@ -37,6 +37,7 @@ export const Player = styled.div`
     justify-content: center;
     flex-direction: column;
     width: 40%;
+    min-width: 360px;
 `;
 
 export const NowPlaying = styled.div`
@@ -67,6 +68,7 @@ export const Timeline = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    gap: 8px;
 
     #time,
     #duration {
@@ -76,6 +78,16 @@ export const Timeline = styled.div`
         color: #a7a7a7;
         cursor: default;
         user-select: none;
+    }
+
+    #time {
+        min-width: 40px;
+        text-align: right;
+    }
+
+    #duration {
+        min-width: 40px;
+        text-align: left;
     }
 
     input[type="range"] {
@@ -111,6 +123,8 @@ export const Timeline = styled.div`
 `;
 
 export const PlayerLeft = styled.div`
+    display: flex;
+    gap: 8px;
     button {
         transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
         color: #fff;
@@ -125,11 +139,17 @@ export const PlayerLeft = styled.div`
 
         :hover svg {
             fill: white;
+        }
+
+        :active svg {
+            fill: #bababa;
         }
     }
 `;
 
 export const PlayerRight = styled.div`
+    display: flex;
+    gap: 8px;
     button {
         transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
         color: #fff;
@@ -145,10 +165,15 @@ export const PlayerRight = styled.div`
         :hover svg {
             fill: white;
         }
+
+        :active svg {
+            fill: #bababa;
+        }
     }
 `;
 
 export const Play = styled.button`
+    align-items: center;
     transition: all 33ms cubic-bezier(0.3, 0, 0.7, 1) 0s;
     background-color: white;
     padding: 0;
