@@ -156,7 +156,7 @@ export const VolumeBar = styled.div`
 
     input[type="range"] {
         --color: transparent;
-        --timeline-color: linear-gradient(#fff, #fff);
+        --volume-color: linear-gradient(#fff, #fff);
         --shadow: 0;
 
         :active {
@@ -168,7 +168,7 @@ export const VolumeBar = styled.div`
         width: 125px;
         background: #5e5e5e;
         border-radius: 5px;
-        background-image: var(--timeline-color);
+        background-image: var(--volume-color);
         background-size: 0% 100%;
         background-repeat: no-repeat;
 

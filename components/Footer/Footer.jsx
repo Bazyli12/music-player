@@ -28,6 +28,7 @@ export default class FooterComponent extends React.Component {
             isUsingTimeline: false,
             soundTime: 0,
             soundDuration: 0,
+            volume: 0.5,
         };
 
         this.componentDidMount = this.componentDidMount.bind(this);
@@ -68,9 +69,33 @@ export default class FooterComponent extends React.Component {
         });
     }
 
+    changeVolume() {
+        console.log(this.volume.value);
+
+        let volume = ((this.volume.value * this.volume.value) / 2) * 2;
+
+        volume = Math.sqrt(this.volume.value - 0.5) / 2 + 0.5;
+        console.log(Math.sqrt(this.volume.value - 0.5) / 2 + 0.5);
+
+        console.log();
+
+        // this.setState({
+        //     volume: this.volume.value,
+        // });
+        // this.audio.volume = this.state.volume;
+
+        this.setState({
+            volume: volume,
+        });
+        this.audio.volume = this.state.volume;
+    }
+
     componentDidMount() {
         this.audio = new Audio(this.state.url);
+        this.audio.volume = this.state.volume;
+
         this.timeline = document.querySelector("#timeline");
+        this.volume = document.querySelector("#volume");
 
         setInterval(() => {
             if (this.state.play) {
@@ -148,6 +173,26 @@ export default class FooterComponent extends React.Component {
                 "linear-gradient(#fff, #fff)"
             );
             this.timeline.style.setProperty("--shadow", "0");
+        });
+
+        this.volume.addEventListener("mouseover", () => {
+            this.volume.style.setProperty("--color", "#fff");
+            this.volume.style.setProperty(
+                "--volume-color",
+                "linear-gradient(#1db954, #1db954)"
+            );
+            this.volume.style.setProperty(
+                "--shadow",
+                "0 2px 4px 0 rgb(0 0 0 / 50%)"
+            );
+        });
+        this.volume.addEventListener("mouseout", () => {
+            this.volume.style.setProperty("--color", "transparent");
+            this.volume.style.setProperty(
+                "--volume-color",
+                "linear-gradient(#fff, #fff)"
+            );
+            this.volume.style.setProperty("--shadow", "0");
         });
     }
 
@@ -277,9 +322,9 @@ export default class FooterComponent extends React.Component {
                                     type="range"
                                     id="volume"
                                     defaultValue="0"
-                                    max="100"
+                                    max="1"
                                     step="0.01"
-                                    // onChange={() => this.changeTimeline()}
+                                    onChange={() => this.changeVolume()}
                                 />
                             </VolumeBar>
                         </Options>
